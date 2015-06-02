@@ -15,65 +15,95 @@
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+Installs VMware Workstation on Linux.
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+Install and configure VMware Workstation installation on Linux. By default
+will install VMware Workstation without license key, 30-day trial.
 
 ## Setup
 
 ### What vmware_workstation affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+* Installs VMware Workstation binaries.
+* Cannot be installed along side any VMware products except vSphere Client, vCenter Converter Standalone.
 
 ### Beginning with vmware_workstation
 
-The very basic steps needed for a user to get the module up and running.
+Install with defaults:
 
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+include vmware_workstation
+
+Remove VMware Workstation
+
+class { 'vmware_workstation' :
+	ensure	=> absent,
+}
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+You can control how VMware Workstation is installed.
 
-## Reference
+ [*ensure*]
+ Must be 'installed' or 'absent'.
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+ [*serial_number*]
+ Optional. Set the serial number for VMware Workstation. If this is left
+ blank then VMware Workstation will expire after 30 days. A warning
+ is issued during installation.
+
+ [*url*]
+ Optional. URL to download VMware workstation from.
+ Defaults to https://download3.vmware.com/software/wkst/file/
+
+ [*version*]
+ Optional. Version of VMware Workstation to download.
+ Default 11.1.0-2496824
+
+ [*cache_dir*]
+ Optional. Wget will keep a cached copy of the installer on the server and
+ only re-download if the date/time stamp of the source changes.
+ Default /var/cache/wget
+
+ [*destination*]
+ Optional. Save location for wget to save installer to.
+ Default /tmp/
+
+ [*filename*]
+ Optional. Name of the VMware Workstation installer to download.
+ Default VMware-Workstation-Full-${version}.${::architecture}.bundle or
+ VMware-workstation-full-${version}.exe
+
+ [*install_options*]
+ Optional. Installation options for VMware Workstation. See VMware
+ documentation.
+ Default silent install, accept EULA, ignore errors. Reference
+
+This module uses two facts to ensure VMware Workstation can be installed.
+
+$architecture is checked to ensure the node is 64-bit.  VMware Workstation can only
+be installed on a 64-bit OS.
+
+$memorytotal_mb is checked to ensure total node memory is greater than 2GB. VMware
+Workstation requires at least 2GB total memory.
+
+https://github.com/maestrodev/puppet-wget module is used to fetch the VMware
+Workstation installer from the default URL.
+
+An exec calls the VMware workstation installer with the default installation
+options.  If you choose to override the default options you must specify
+ALL installation options, including Accept EULA, silent install, etc.
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+Tested on CentOS6.5.
+
+Some code written to accomodate Windows but it is incomplete and not tested.
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+Fork and send a pull request or submit an issue via Github to contribute.
 
-## Release Notes/Contributors/Etc **Optional**
+## Release Notes/Contributors/Etc 
 
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
