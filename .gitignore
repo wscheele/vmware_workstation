@@ -18,3 +18,4 @@ puppet-enterprise-*
 provision/keys
 /modules
 spec/fixtures/*
+pkg/*
