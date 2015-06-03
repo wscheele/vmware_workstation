@@ -19,5 +19,3 @@ Gemfile.lock
 install_log*
 puppet-enterprise-*
 provision/keys
-spec/fixtures/*
-pkg/*

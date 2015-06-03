@@ -1,0 +1,14 @@
+{
+  "name": "mmarseglia-vmware_workstation",
+  "version": "0.1.0",
+  "author": "mmarseglia",
+  "summary": "Install and configure VMware Workstation.",
+  "license": "Apache-2.0",
+  "source": "https://github.com/mmarseglia/vmware_workstation",
+  "project_page": "https://github.com/mmarseglia/vmware_workstation",
+  "issues_url": "https://github.com/mmarseglia/vmware_workstation/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
+    {"name":"maestrodev-wget","version_requirement":">= 1.0.0"}
+  ]
+}
