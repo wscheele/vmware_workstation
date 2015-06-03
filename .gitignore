@@ -14,6 +14,7 @@ Icon?
 .vagrant
 
 .bundle
+Gemfile.lock
 
 install_log*
 puppet-enterprise-*
