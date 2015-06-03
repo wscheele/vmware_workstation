@@ -80,7 +80,7 @@ class vmware_workstation (
   $uninstall_command  = $::vmware_workstation::params::uninstall_command,
 ) inherits vmware_workstation::params {
 
-  if $::architecture !~ 'x86_64' {
+  if $::architecture != 'x86_64' {
     fail("VMware Workstation requires a 64-bit operating system. Architecture ${::architecture} reported.")
   }
 
