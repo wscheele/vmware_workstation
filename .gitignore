@@ -16,6 +16,5 @@ Icon?
 install_log*
 puppet-enterprise-*
 provision/keys
-/modules
 spec/fixtures/*
 pkg/*

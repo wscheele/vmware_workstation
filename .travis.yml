@@ -1,0 +1,7 @@
+rvm: 1.8.7
+notifications:
+  email:
+    - mike@marseglia.org
+env:
+  - PUPPET_VERSION=4.1.0
+  - PUPPET_VERSION=3.8.0
