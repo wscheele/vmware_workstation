@@ -37,10 +37,10 @@ class vmware_workstation::params {
     $install_options = '/s /nsr /v "EULAS_AGREED=1"'
   }
 
-  if $serial_number == undef {
+  if $::vmware_workstation::serial_number == undef {
     notice('No serial number specified. VMware Workstation will expire after 30 days')
   } else {
-    $install_options="${install_options} --set-setting vmware-workstation ${serial_number}"
+    $install_options="${install_options} --set-setting vmware-workstation ${::vmware_workstation::serial_number}"
   }
 
 }

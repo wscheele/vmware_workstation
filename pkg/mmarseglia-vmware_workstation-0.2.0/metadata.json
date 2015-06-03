@@ -1,6 +1,6 @@
 {
   "name": "mmarseglia-vmware_workstation",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "mmarseglia",
   "summary": "Install and configure VMware Workstation.",
   "license": "Apache-2.0",

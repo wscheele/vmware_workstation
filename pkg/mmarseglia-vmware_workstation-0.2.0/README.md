@@ -1,4 +1,5 @@
 # vmware_workstation
+[![Build Status](https://travis-ci.org/mmarseglia/vmware_workstation.svg)](https://travis-ci.org/mmarseglia/vmware_workstation)
 
 #### Table of Contents
 
