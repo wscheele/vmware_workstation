@@ -103,11 +103,10 @@ class vmware_workstation (
   case $ensure {
     'installed' : {
       archive{ 'vmware_workstation':
-        ensure       => present,
-        extract      => false,
-        extract_path => $destination,
-        source       => $source,
-        creates      => '/usr/bin/vmware',
+        ensure  => present,
+        path    => "${destination}${filename}",
+        source  => $source,
+        creates => '/usr/bin/vmware',
       }
 
       exec { 'install_workstation' :
