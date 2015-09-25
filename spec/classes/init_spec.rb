@@ -6,7 +6,7 @@ describe 'vmware_workstation' do
 
     it { should contain_class('vmware_workstation') }
     it { should compile }
-    it { should contain_wget__fetch('vmware_workstation')}
+    it { should contain_archive('vmware_workstation')}
     it { should contain_exec('install_workstation') }
   end
 
