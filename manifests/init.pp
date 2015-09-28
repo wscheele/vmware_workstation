@@ -102,18 +102,17 @@ class vmware_workstation (
 
   case $ensure {
     'installed' : {
-
-      include wget
-
-      wget::fetch { 'vmware_workstation' :
-        destination => "${destination}${filename}",
-        source      => $source,
-        cache_dir   => $cache_dir,
+      archive{ 'vmware_workstation':
+        ensure  => present,
+        path    => "${destination}${filename}",
+        source  => $source,
+        creates => '/usr/bin/vmware',
       }
 
       exec { 'install_workstation' :
         command => $install_command,
-        require => Wget::Fetch['vmware_workstation'],
+        require => Archive['vmware_workstation'],
+        creates => '/usr/bin/vmware',
       }
     }
     'absent' : {
