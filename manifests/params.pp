@@ -20,7 +20,7 @@
 class vmware_workstation::params {
 
   $url = 'https://download3.vmware.com/software/wkst/file/'
-  $version = '11.1.0-2496824'
+  $version = '12.1.0-3272444'
 
   if $::kernel in 'Linux' {
     $cache_dir = '/var/cache/wget'
