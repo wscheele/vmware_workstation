@@ -87,7 +87,7 @@ class vmware_workstation (
   # convert total memory to a number for comparison
   $_memorysize_mb = $::memorysize_mb * 1
   if $_memorysize_mb < 2000 {
-    fail("VMware Workstation requires at least 2GB of memory. Memory ${::memorysize} reported.")
+    warning("VMware Workstation requires at least 2GB of memory. Memory ${::memorysize} reported.")
   }
 
   validate_string($ensure)
