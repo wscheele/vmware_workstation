@@ -1,5 +1,6 @@
 # vmware_workstation
 [![Build Status](https://travis-ci.org/mmarseglia/vmware_workstation.svg)](https://travis-ci.org/mmarseglia/vmware_workstation)
+[![Gitter chat](https://badges.gitter.im/mmarseglia/vmware_workstation.png)](https://gitter.im/mmarseglia/vmware_workstation "Gitter chat")
 
 #### Table of Contents
 
