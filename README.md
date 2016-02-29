@@ -1,6 +1,7 @@
 # vmware_workstation
 [![Build Status](https://travis-ci.org/mmarseglia/vmware_workstation.svg)](https://travis-ci.org/mmarseglia/vmware_workstation)
 [![Gitter chat](https://badges.gitter.im/mmarseglia/vmware_workstation.png)](https://gitter.im/mmarseglia/vmware_workstation "Gitter chat")
+[![Coverage Status](https://coveralls.io/repos/github/mmarseglia/vmware_workstation/badge.svg?branch=master)](https://coveralls.io/github/mmarseglia/vmware_workstation?branch=master)
 
 #### Table of Contents
 
