@@ -1,8 +1,6 @@
 require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-lint/tasks/puppet-lint'
-require 'coveralls'
-
-Coveralls.wear!
+require 'coveralls/rake/task'
 
 PuppetLint.configuration.send('disable_80chars')
 PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "pkg/**/*.pp"]
@@ -21,3 +19,6 @@ task :validate do
 end
 
 task :default => [:spec, :validate, :lint]
+
+Coveralls::RakeTask.new
+task :test_with_coveralls => [:default, 'coveralls:push']
