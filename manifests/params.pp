@@ -25,7 +25,7 @@ class vmware_workstation::params {
   if $::kernel in 'Linux' {
     $cache_dir = '/var/cache/wget'
     $destination = '/tmp/'
-    $filename = "VMware-Workstation-Full-${version}.${::architecture}.bundle"
+    $filename = "VMware-Workstation-Full-${version}.x86_64.bundle"
     $install_options = '--ignore-errors --console --required --eulas-agreed'
     $install_command = "/bin/sh ${destination}${filename} ${install_options}"
     $uninstall_command = '/usr/lib/vmware-installer -u vmware-workstation'
