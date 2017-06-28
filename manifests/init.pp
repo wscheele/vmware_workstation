@@ -70,15 +70,9 @@
 class vmware_workstation (
   $ensure             = 'installed',
   $serial_number      = UNDEF,
-  $url                = $::vmware_workstation::params::url,
-  $version            = $::vmware_workstation::params::version,
-  $cache_dir          = $::vmware_workstation::params::cache_dir,
-  $destination        = $::vmware_workstation::params::destination,
-  $filename           = $::vmware_workstation::params::filename,
-  $install_command    = $::vmware_workstation::params::install_command,
-  $install_options    = $::vmware_workstation::params::install_options,
-  $uninstall_command  = $::vmware_workstation::params::uninstall_command,
-) inherits vmware_workstation::params {
+  $url                = 'https://download3.vmware.com/software/wkst/file/',
+  $version            = '12.1.0-3272444',
+) {
 
   if ! ($::architecture in ['x86_64', 'amd64']) {
     fail("VMware Workstation requires a 64-bit operating system. Architecture ${::architecture} reported.")
@@ -88,6 +82,27 @@ class vmware_workstation (
   $_memorysize_mb = $::memorysize_mb * 1
   if $_memorysize_mb < 2000 {
     warning("VMware Workstation requires at least 2GB of memory. Memory ${::memorysize} reported.")
+  }
+
+  if $::kernel in 'Linux' {
+    $cache_dir = '/var/cache/wget'
+    $destination = '/tmp/'
+    $filename = "VMware-Workstation-Full-${version}.x86_64.bundle"
+    $install_options = '--ignore-errors --console --required --eulas-agreed'
+    $install_command = "/bin/sh ${destination}${filename} ${install_options}"
+    $uninstall_command = '/usr/lib/vmware-installer/2.1.0/vmware-installer -u vmware-workstation'
+  } elsif $::kernel in 'Windows' {
+    $cache_dir = 'C:\Windows\Temp\\'
+    $destination  = 'C:\TEMP\\'
+    $filename = "VMware-workstation-full-${version}.exe"
+    $install_command = "${destination}${filename} ${install_options}"
+    $install_options = '/s /nsr /v "EULAS_AGREED=1"'
+  }
+
+  if $::vmware_workstation::serial_number == undef {
+    notice('No serial number specified. VMware Workstation will expire after 30 days')
+  } else {
+    $install_options="${install_options} --set-setting vmware-workstation ${::vmware_workstation::serial_number}"
   }
 
   validate_string($ensure)
