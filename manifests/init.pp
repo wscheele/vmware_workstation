@@ -89,20 +89,21 @@ class vmware_workstation (
     $destination = '/tmp/'
     $filename = "VMware-Workstation-Full-${version}.x86_64.bundle"
     $install_options = '--ignore-errors --console --required --eulas-agreed'
-    $install_command = "/bin/sh ${destination}${filename} ${install_options}"
     $uninstall_command = '/usr/lib/vmware-installer/2.1.0/vmware-installer -u vmware-workstation'
+    $install_command = "/bin/sh ${destination}${filename} ${install_options}"
   } elsif $::kernel in 'Windows' {
     $cache_dir = 'C:\Windows\Temp\\'
     $destination  = 'C:\TEMP\\'
     $filename = "VMware-workstation-full-${version}.exe"
-    $install_command = "${destination}${filename} ${install_options}"
     $install_options = '/s /nsr /v "EULAS_AGREED=1"'
+    $install_command = "${destination}${filename} ${install_options}"
   }
 
   if $::vmware_workstation::serial_number == undef {
     notice('No serial number specified. VMware Workstation will expire after 30 days')
+    $final_install_command=$install_command
   } else {
-    $install_options="${install_options} --set-setting vmware-workstation ${::vmware_workstation::serial_number}"
+    $final_install_command="${install_command} --set-setting vmware-workstation ${::vmware_workstation::serial_number}"
   }
 
   validate_string($ensure)
@@ -125,7 +126,7 @@ class vmware_workstation (
       }
 
       exec { 'install_workstation' :
-        command => $install_command,
+        command => $final_install_command,
         require => Archive['vmware_workstation'],
         creates => '/usr/bin/vmware',
       }
