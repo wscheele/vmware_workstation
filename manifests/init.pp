@@ -103,7 +103,7 @@ class vmware_workstation (
     notice('No serial number specified. VMware Workstation will expire after 30 days')
     $final_install_command=$install_command
   } else {
-    $final_install_command="${install_command} --set-setting vmware-workstation ${::vmware_workstation::serial_number}"
+    $final_install_command="${install_command} --set-setting vmware-workstation ${::vmware_workstation::serial_number} foobar"
   }
 
   validate_string($ensure)
